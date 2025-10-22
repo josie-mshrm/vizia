@@ -1,3 +1,5 @@
+use vizia_render::Canvas;
+
 use crate::prelude::*;
 
 use std::any::{Any, TypeId};

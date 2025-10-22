@@ -473,7 +473,7 @@ pub(crate) fn draw_bounds(
 
     let matrix = cache.transform.get(entity).copied().unwrap_or_default();
 
-    let rect: Rect = layout_bounds.into();
+    let rect: kurbo::Rect = layout_bounds.into();
     let tr = matrix.map_rect(rect).0;
 
     let mut dirty_bounds: BoundingBox = tr.into();

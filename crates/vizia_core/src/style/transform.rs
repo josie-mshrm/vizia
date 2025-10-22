@@ -1,3 +1,4 @@
+use vizia_render::Matrix;
 use vizia_style::{Angle, Scale, Transform, Translate};
 
 use crate::layout::BoundingBox;
@@ -35,7 +36,7 @@ impl IntoTransform for Angle {
 
 impl IntoTransform for Vec<Transform> {
     fn as_transform(&self, bounds: BoundingBox, scale_factor: f32) -> Matrix {
-        let mut result = Matrix::new_identity();
+        let mut result = Matrix::IDENTITY;
         for transform in self.iter() {
             let t = match transform {
                 Transform::Translate(translate) => {
@@ -97,9 +98,9 @@ impl IntoTransform for Vec<Transform> {
                     Matrix::skew((0.0, cy))
                 }
 
-                Transform::Matrix(matrix) => Matrix::new_all(
+                Transform::Matrix(matrix) => Matrix::from_cols_array(&[
                     matrix.a, matrix.c, matrix.e, matrix.b, matrix.d, matrix.f, 0.0, 0.0, 1.0,
-                ),
+                ]),
             };
 
             result = result * t;

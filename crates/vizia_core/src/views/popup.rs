@@ -540,9 +540,9 @@ impl View for Arrow {
     fn element(&self) -> Option<&'static str> {
         Some("arrow")
     }
-    fn draw(&self, cx: &mut DrawContext, canvas: &Canvas) {
+    fn draw(&self, cx: &mut DrawContext, canvas: &ViziaCanvas) {
         let bounds = cx.bounds();
-        let mut path = vg::Path::new();
+        let mut path = kurbo::BezPath::new();
         match Popup::placement.get(cx) {
             Placement::Bottom | Placement::BottomStart | Placement::BottomEnd => {
                 path.move_to(bounds.bottom_left());

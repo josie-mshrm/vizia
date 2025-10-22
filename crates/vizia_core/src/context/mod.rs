@@ -31,9 +31,10 @@ pub use event::*;
 pub use proxy::*;
 pub use resource::*;
 
+pub use text_context::TextContext;
+
 use crate::{
     binding::{Store, StoreId},
-    entity,
     events::{TimedEvent, TimedEventHandle, TimerState, ViewHandler},
     model::ModelData,
 };
@@ -46,7 +47,6 @@ use crate::{cache::CachedData, resource::ImageOrSvg};
 
 use crate::prelude::*;
 use crate::resource::ResourceManager;
-use text_context::TextContext;
 use vizia_input::{ImeState, MouseState};
 use vizia_storage::{ChildIterator, LayoutTreeIterator};
 

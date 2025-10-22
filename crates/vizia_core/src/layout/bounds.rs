@@ -275,6 +275,23 @@ impl BoundingBox {
     // }
 }
 
+impl From<BoundingBox> for kurbo::Rect {
+    fn from(bounds: BoundingBox) -> Self {
+        kurbo::Rect {
+            x0: bounds.left() as f64,
+            y0: bounds.top() as f64,
+            x1: bounds.right() as f64,
+            y1: bounds.bottom() as f64,
+        }
+    }
+}
+
+impl From<kurbo::Rect> for BoundingBox {
+    fn from(rect: kurbo::Rect) -> Self {
+        BoundingBox { x: rect.x0 as f32, y: rect.y0 as f32, w: rect.x1 as f32, h: rect.y1 as f32 }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

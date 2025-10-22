@@ -1,5 +1,6 @@
 [package]
 name = "vizia_render"
+description = "The rendering functions of Vizia"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true
@@ -7,6 +8,10 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
+anyrender = "0.6.1"
+kurbo = "0.12.0"
+glam = "0.30.8"
+color = "0.3.2"
 
 [lints]
 workspace = true

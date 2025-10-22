@@ -15,6 +15,7 @@ use crate::prelude::*;
 use crate::resource::{ImageOrSvg, ResourceManager, StoredImage};
 use crate::tree::{focus_backward, focus_forward, is_navigatable};
 use vizia_input::MouseState;
+use vizia_render::Matrix;
 
 use super::text_context::TextContext;
 #[cfg(feature = "clipboard")]

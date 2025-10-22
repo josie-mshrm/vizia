@@ -9,6 +9,7 @@
 // };
 use std::any::{Any, TypeId};
 use std::f32::consts::SQRT_2;
+use vizia_render::Canvas;
 use vizia_style::LengthPercentageOrAuto;
 
 use hashbrown::HashMap;

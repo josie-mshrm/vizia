@@ -19,6 +19,7 @@ use std::any::{Any, TypeId};
 mod handle;
 pub use handle::Handle;
 use hashbrown::HashMap;
+use vizia_render::Canvas;
 
 use crate::events::ViewHandler;
 use accesskit::{Node, TreeUpdate};

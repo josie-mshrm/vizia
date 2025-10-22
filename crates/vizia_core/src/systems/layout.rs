@@ -4,8 +4,6 @@ use vizia_storage::LayoutTreeIterator;
 use crate::layout::node::SubLayout;
 use crate::prelude::*;
 
-use super::{text_layout_system, text_system};
-
 /// Determines the size and position of views.
 /// TODO: Currently relayout is done on an entire tree rather than incrementally.
 /// Incremental relayout can be done by keeping a list of nodes that need relayout,

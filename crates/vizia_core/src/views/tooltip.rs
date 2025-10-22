@@ -1,3 +1,5 @@
+use vizia_render::Canvas;
+
 use crate::context::TreeProps;
 use crate::prelude::*;
 
@@ -383,7 +385,7 @@ impl View for Arrow {
 
     fn draw(&self, cx: &mut DrawContext, canvas: &Canvas) {
         let bounds = cx.bounds();
-        let mut path = vg::Path::new();
+        let mut path = kurbo::BezPath::new();
         match Tooltip::shift.get(cx) {
             Placement::Bottom | Placement::BottomStart | Placement::BottomEnd => {
                 path.move_to(bounds.bottom_left());

@@ -21,9 +21,11 @@ vizia_id.workspace = true
 vizia_input.workspace = true
 vizia_window.workspace = true
 vizia_style.workspace = true
+vizia_render.workspace = true
 accesskit = "0.18"
 
 morphorm = "0.7.0"
+kurbo = "0.12.0"
 bitflags = "2.8"
 fluent-bundle = "0.15"
 fluent-langneg = "0.13"

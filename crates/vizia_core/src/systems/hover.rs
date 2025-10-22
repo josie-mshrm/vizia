@@ -2,6 +2,7 @@ use std::{cmp::Ordering, collections::BinaryHeap};
 
 use crate::prelude::*;
 use log::debug;
+use vizia_render::Matrix;
 use vizia_storage::{DrawChildIterator, LayoutParentIterator};
 
 // Determines the hovered entity based on the mouse cursor position.
@@ -19,7 +20,7 @@ pub fn hover_system(cx: &mut Context, window_entity: Entity) {
         cx.style.pointer_events.get(window_entity).copied().unwrap_or_default().into();
     queue.push(ZEntity { index: 0, pointer_events, entity: window_entity });
     let mut hovered = window_entity;
-    let transform = Matrix::new_identity();
+    let transform = Matrix::IDENTITY;
     // let clip_bounds = cx.cache.get_bounds(window_entity);
     let clip_bounds: BoundingBox =
         BoundingBox { x: -f32::MAX / 2.0, y: -f32::MAX / 2.0, w: f32::MAX, h: f32::MAX };

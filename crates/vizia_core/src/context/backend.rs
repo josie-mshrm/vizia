@@ -1,5 +1,6 @@
 use std::any::Any;
 
+use vizia_render::Surface;
 use vizia_storage::LayoutTreeIterator;
 use vizia_window::WindowDescription;
 
