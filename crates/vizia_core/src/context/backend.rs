@@ -1,6 +1,5 @@
 use std::any::Any;
 
-use skia_safe::Surface;
 use vizia_storage::LayoutTreeIterator;
 use vizia_window::WindowDescription;
 

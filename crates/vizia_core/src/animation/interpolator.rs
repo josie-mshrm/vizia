@@ -5,8 +5,6 @@ use vizia_style::{
     Opacity, PercentageOrNumber, Rect, Scale, Shadow, Transform, Translate, RGBA,
 };
 
-use skia_safe::Matrix;
-
 use crate::style::ImageOrGradient;
 
 /// A trait which describes how a property is interpolated for animations.

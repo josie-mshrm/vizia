@@ -2,7 +2,6 @@ use std::{cmp::Ordering, collections::BinaryHeap};
 
 use crate::prelude::*;
 use log::debug;
-use skia_safe::Matrix;
 use vizia_storage::{DrawChildIterator, LayoutParentIterator};
 
 // Determines the hovered entity based on the mouse cursor position.

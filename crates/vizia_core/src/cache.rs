@@ -2,7 +2,7 @@
 //! results. The main type here is CachedData, usually accessed via `cx.cache`.
 
 use crate::prelude::*;
-use skia_safe::{Matrix, Path};
+// use skia_safe::{Matrix, Path};
 use vizia_storage::SparseSet;
 
 /// Stores data which can be cached between system runs.

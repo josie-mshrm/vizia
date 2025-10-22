@@ -31,7 +31,6 @@ pub mod modifiers;
 pub mod resource;
 pub mod style;
 pub(crate) mod systems;
-pub(crate) mod text;
 #[doc(hidden)]
 pub mod tree;
 /// Helper utilities
@@ -42,11 +41,6 @@ pub mod window;
 
 pub mod recoil;
 mod storage;
-
-/// Contains types and functions used for custom drawing within views. This is a re-export of [skia-safe](https://github.com/rust-skia/rust-skia).
-pub mod vg {
-    pub use skia_safe::*;
-}
 
 /// A collection of built-in SVG icons.
 pub mod icons;
@@ -94,7 +88,6 @@ pub mod prelude {
     pub use super::views::*;
     pub use super::window::{DropData, WindowEvent};
     pub use accesskit::{Action, Live, Role};
-    pub use skia_safe::Canvas;
     pub use vizia_derive::{Data, Lens};
     pub use vizia_id::GenerationalId;
     pub use vizia_input::{Code, Key, KeyChord, Modifiers, MouseButton, MouseButtonState};

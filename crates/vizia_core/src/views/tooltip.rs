@@ -1,6 +1,5 @@
 use crate::context::TreeProps;
 use crate::prelude::*;
-use crate::vg;
 
 /// A tooltip view.
 ///
@@ -381,6 +380,7 @@ impl View for Arrow {
     fn element(&self) -> Option<&'static str> {
         Some("arrow")
     }
+
     fn draw(&self, cx: &mut DrawContext, canvas: &Canvas) {
         let bounds = cx.bounds();
         let mut path = vg::Path::new();

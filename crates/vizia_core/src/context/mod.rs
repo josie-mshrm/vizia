@@ -7,13 +7,9 @@ mod draw;
 mod event;
 mod proxy;
 mod resource;
+mod text_context;
 
 use log::debug;
-use skia_safe::{
-    svg,
-    textlayout::{FontCollection, TypefaceFontProvider},
-    FontMgr,
-};
 use std::cell::RefCell;
 use std::collections::{BinaryHeap, VecDeque};
 use std::rc::Rc;
@@ -50,7 +46,7 @@ use crate::{cache::CachedData, resource::ImageOrSvg};
 
 use crate::prelude::*;
 use crate::resource::ResourceManager;
-use crate::text::TextContext;
+use text_context::TextContext;
 use vizia_input::{ImeState, MouseState};
 use vizia_storage::{ChildIterator, LayoutTreeIterator};
 
@@ -651,7 +647,7 @@ impl Context {
     /// `duration` - An optional duration for the timer. Pass `None` for a continuos timer.
     /// `callback` - A callback which is called on when the timer is started, ticks, and stops. Disambiguated by the `TimerAction` parameter of the callback.
     ///
-    /// Returns a `Timer` id which can be used to start and stop the timer.  
+    /// Returns a `Timer` id which can be used to start and stop the timer.
     ///
     /// # Example
     /// Creates a timer which calls the provided callback every second for 5 seconds:
@@ -664,7 +660,7 @@ impl Context {
     ///         TimerAction::Start => {
     ///             debug!("Start timer");
     ///         }
-    ///     
+    ///
     ///         TimerAction::Tick(delta) => {
     ///             debug!("Tick timer: {:?}", delta);
     ///         }
@@ -1069,7 +1065,7 @@ pub trait EmitContext {
     /// # use instant::{Instant, Duration};
     /// # let cx = &mut Context::default();
     /// # enum AppEvent {Increment}
-    /// cx.schedule_emit_custom(    
+    /// cx.schedule_emit_custom(
     ///     Event::new(AppEvent::Increment)
     ///         .target(Entity::root())
     ///         .origin(cx.current())

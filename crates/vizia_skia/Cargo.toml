@@ -1,0 +1,19 @@
+[package]
+name = "vizia_skia"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+vizia_core.workspace = true
+
+skia-safe = { version = "0.84", features = ["gl", "textlayout", "svg"] }
+morphorm = "0.7.0"
+bitflags = "2.8"
+unicode-segmentation = "1.12"
+log = "0.4"
+
+[lints]
+workspace = true
