@@ -1,7 +1,4 @@
-use std::ops::Deref;
-
 use morphorm::Units;
-use vizia_render::Matrix;
 use vizia_style::{
     Angle, BackgroundSize, ClipPath, Color, ColorStop, Display, Filter, FontSize, Gradient, Length,
     LengthOrPercentage, LengthPercentageOrAuto, LengthValue, LineDirection, LinearGradient,
@@ -201,7 +198,7 @@ impl Interpolator for Transform {
 }
 
 // TODO: Split this into interpolated matrices for translation, rotation, scale, and skew
-impl Interpolator for Matrix {
+impl Interpolator for vizia_render::Affine {
     fn interpolate(start: &Self, end: &Self, t: f32) -> Self {
         let mut transform = *start;
 
@@ -212,7 +209,7 @@ impl Interpolator for Matrix {
         transform[4] = f32::interpolate(&start[4], &end[4], t);
         transform[5] = f32::interpolate(&start[5], &end[5], t);
 
-        transform
+        vizia_render::Affine::new_from(transform)
     }
 }
 

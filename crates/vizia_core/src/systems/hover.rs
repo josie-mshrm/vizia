@@ -2,7 +2,6 @@ use std::{cmp::Ordering, collections::BinaryHeap};
 
 use crate::prelude::*;
 use log::debug;
-use vizia_render::Matrix;
 use vizia_storage::{DrawChildIterator, LayoutParentIterator};
 
 // Determines the hovered entity based on the mouse cursor position.
@@ -20,7 +19,7 @@ pub fn hover_system(cx: &mut Context, window_entity: Entity) {
         cx.style.pointer_events.get(window_entity).copied().unwrap_or_default().into();
     queue.push(ZEntity { index: 0, pointer_events, entity: window_entity });
     let mut hovered = window_entity;
-    let transform = Matrix::IDENTITY;
+    let transform = Affine::IDENTITY;
     // let clip_bounds = cx.cache.get_bounds(window_entity);
     let clip_bounds: BoundingBox =
         BoundingBox { x: -f32::MAX / 2.0, y: -f32::MAX / 2.0, w: f32::MAX, h: f32::MAX };
@@ -91,7 +90,7 @@ fn hover_entity(
     parent_pointer_events: bool,
     queue: &mut BinaryHeap<ZEntity>,
     hovered: &mut Entity,
-    parent_transform: Matrix,
+    parent_transform: Affine,
     clip_bounds: &BoundingBox,
 ) {
     // Skip if non-hoverable (will skip any descendants)
@@ -145,8 +144,8 @@ fn hover_entity(
 
     transform = cx.transform() * transform;
 
-    let t = transform.invert().unwrap();
-    let t = t.map_point((cursor_x, cursor_y));
+    let t = transform.inverse();
+    let t = t * Point::new(cursor_x as f64, cursor_y as f64);
     let tx = t.x;
     let ty = t.y;
     let clipping = clip_bounds.intersection(&cx.clip_region());
@@ -159,7 +158,11 @@ fn hover_entity(
     }
 
     if pointer_events {
-        if tx >= b.left() && tx < b.right() && ty >= b.top() && ty < b.bottom() {
+        if tx >= b.left() as f64
+            && tx < b.right() as f64
+            && ty >= b.top() as f64
+            && ty < b.bottom() as f64
+        {
             *hovered = cx.current;
 
             if !cx

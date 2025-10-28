@@ -10,7 +10,6 @@ repository.workspace = true
 [dependencies]
 anyrender = "0.6.1"
 kurbo = "0.12.0"
-glam = "0.30.8"
 color = "0.3.2"
 
 [lints]

@@ -385,7 +385,7 @@ impl View for Arrow {
 
     fn draw(&self, cx: &mut DrawContext, canvas: &Canvas) {
         let bounds = cx.bounds();
-        let mut path = kurbo::BezPath::new();
+        let mut path = vizia_render::Path::new();
         match Tooltip::shift.get(cx) {
             Placement::Bottom | Placement::BottomStart | Placement::BottomEnd => {
                 path.move_to(bounds.bottom_left());
@@ -417,7 +417,7 @@ impl View for Arrow {
 
             _ => {}
         }
-        path.close();
+        path.close_path();
 
         let bg = cx.background_color();
 

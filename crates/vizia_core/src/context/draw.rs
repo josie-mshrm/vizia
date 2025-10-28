@@ -7,19 +7,20 @@
 //     BlurStyle, ClipOp, MaskFilter, Matrix, Paint, PaintStyle, Path, PathDirection, PathEffect,
 //     Point, RRect, Rect, SamplingOptions, Shader, TileMode,
 // };
+
 use std::any::{Any, TypeId};
 use std::f32::consts::SQRT_2;
-use vizia_render::Canvas;
+use vizia_render::{Affine, Canvas, Path, Point, Rect, RoundedRect};
 use vizia_style::LengthPercentageOrAuto;
 
 use hashbrown::HashMap;
 
+use super::TextContext;
 use crate::animation::Interpolator;
 use crate::cache::CachedData;
 use crate::events::ViewHandler;
 use crate::prelude::*;
 use crate::resource::{ImageOrSvg, ResourceManager};
-use crate::text::TextContext;
 use vizia_input::MouseState;
 
 use super::ModelData;
@@ -158,7 +159,7 @@ impl DrawContext<'_> {
     }
 
     /// Returns the clip path of the current view.
-    pub fn clip_path(&self) -> Option<skia_safe::Path> {
+    pub fn clip_path(&self) -> Option<Path> {
         let bounds = self.bounds();
         let overflowx = self.style.overflowx.get(self.current).copied().unwrap_or_default();
         let overflowy = self.style.overflowy.get(self.current).copied().unwrap_or_default();
@@ -208,7 +209,7 @@ impl DrawContext<'_> {
     }
 
     /// Returns the 2D transform of the current view.
-    pub fn transform(&self) -> Matrix {
+    pub fn transform(&self) -> Affine {
         let bounds = self.bounds();
         let scale_factor = self.scale_factor();
 
@@ -218,15 +219,15 @@ impl DrawContext<'_> {
             .transform_origin
             .get(self.current)
             .map(|transform_origin| {
-                let mut origin = Matrix::translate(bounds.top_left());
+                let mut origin = Affine::translate(bounds.top_left());
                 let offset = transform_origin.as_transform(bounds, scale_factor);
                 origin = offset * origin;
                 origin
             })
-            .unwrap_or(Matrix::translate(bounds.center()));
+            .unwrap_or(Affine::translate(bounds.center()));
 
         let mut transform = origin;
-        origin = origin.invert().unwrap();
+        origin = origin.inverse();
 
         // Apply translation.
         if let Some(translate) = self.style.translate.get(self.current) {
@@ -517,7 +518,7 @@ impl DrawContext<'_> {
         let bounds = self.bounds();
         let mut path = self.cache.path.get(self.current).unwrap().clone();
 
-        path.offset(bounds.top_left());
+        path.move_to(bounds.top_left());
 
         path
     }
@@ -543,7 +544,7 @@ impl DrawContext<'_> {
 
         let rect: Rect = bounds.into();
 
-        let mut rr = RRect::new_rect_radii(
+        let mut rr = RoundedRect::from_rect(
             rect,
             &[
                 Point::new(corner_top_left_radius, corner_top_left_radius),
@@ -555,10 +556,10 @@ impl DrawContext<'_> {
 
         rr = rr.with_outset(outset);
 
-        let x = rr.bounds().x();
-        let y = rr.bounds().y();
-        let width = rr.width();
-        let height = rr.height();
+        let x = rr.rect().x0 as f32;
+        let y = rr.rect().y0 as f32;
+        let width = rr.width() as f32;
+        let height = rr.height() as f32;
 
         //TODO: Cache the path and regenerate if the bounds change
         let mut path = Path::new();
@@ -584,7 +585,7 @@ impl DrawContext<'_> {
         {
             path.add_rrect(rr, None);
         } else {
-            let top_right = rr.radii(Corner::UpperRight).x;
+            let top_right = rr.radii().top_right as f32;
 
             if top_right > 0.0 {
                 let (a, b, c, d, l, p, radius) = compute_smooth_corner(

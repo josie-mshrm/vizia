@@ -2,9 +2,8 @@
 //! results. The main type here is CachedData, usually accessed via `cx.cache`.
 
 use crate::prelude::*;
-use kurbo::BezPath;
-// use skia_safe::{Matrix, Path};
-use vizia_render::Matrix;
+use vizia_render::Affine;
+use vizia_render::{self, Path};
 use vizia_storage::SparseSet;
 
 /// Stores data which can be cached between system runs.
@@ -17,9 +16,9 @@ pub struct CachedData {
     pub(crate) draw_bounds: SparseSet<BoundingBox>,
     pub(crate) relative_bounds: SparseSet<BoundingBox>,
     pub(crate) geo_changed: SparseSet<GeoChanged>,
-    pub(crate) transform: SparseSet<Matrix>,
+    pub(crate) transform: SparseSet<Affine>,
     pub(crate) clip_path: SparseSet<BoundingBox>,
-    pub(crate) path: SparseSet<BezPath>,
+    pub(crate) path: SparseSet<Path>,
 }
 
 impl CachedData {
@@ -27,7 +26,7 @@ impl CachedData {
         self.bounds.insert(entity, Default::default());
         self.relative_bounds.insert(entity, Default::default());
         self.geo_changed.insert(entity, GeoChanged::empty());
-        self.transform.insert(entity, Matrix::IDENTITY);
+        self.transform.insert(entity, Affine::IDENTITY);
     }
 
     pub(crate) fn remove(&mut self, entity: Entity) {

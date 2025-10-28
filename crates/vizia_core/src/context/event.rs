@@ -15,7 +15,6 @@ use crate::prelude::*;
 use crate::resource::{ImageOrSvg, ResourceManager, StoredImage};
 use crate::tree::{focus_backward, focus_forward, is_navigatable};
 use vizia_input::MouseState;
-use vizia_render::Matrix;
 
 use super::text_context::TextContext;
 #[cfg(feature = "clipboard")]
@@ -340,7 +339,7 @@ impl<'a> EventContext<'a> {
     }
 
     /// Returns the 2D transform of the current view.
-    pub fn transform(&self) -> Matrix {
+    pub fn transform(&self) -> Affine {
         let bounds = self.bounds();
         let scale_factor = self.scale_factor();
 
@@ -350,15 +349,15 @@ impl<'a> EventContext<'a> {
             .transform_origin
             .get(self.current)
             .map(|transform_origin| {
-                let mut origin = Matrix::translate(bounds.top_left());
+                let mut origin = Affine::translate(bounds.top_left());
                 let offset = transform_origin.as_transform(bounds, scale_factor);
                 origin = offset * origin;
                 origin
             })
-            .unwrap_or(Matrix::translate(bounds.center()));
+            .unwrap_or(Affine::translate(bounds.center()));
         // transform = origin * transform;
         let mut transform = origin;
-        origin = origin.invert().unwrap();
+        origin = origin.inverse();
 
         // Apply translation.
         if let Some(translate) = self.style.translate.get(self.current) {
@@ -387,7 +386,7 @@ impl<'a> EventContext<'a> {
                         let end_transform = end.value.as_transform(bounds, scale_factor);
                         let t = animation_state.t;
                         let animated_transform =
-                            Matrix::interpolate(&start_transform, &end_transform, t);
+                            Affine::interpolate(&start_transform, &end_transform, t);
                         transform = transform * animated_transform;
                     }
                 }
