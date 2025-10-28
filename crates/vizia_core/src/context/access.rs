@@ -1,6 +1,6 @@
 use accesskit::{Node, NodeId, Rect, TextDirection, TextSelection};
 
-use crate::{cache::CachedData, prelude::*};
+use crate::{cache::CachedData, prelude::*, text::TextContext};
 
 /// A context used for configuring the accessibility features of a view.
 pub struct AccessContext<'a> {

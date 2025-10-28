@@ -1,3 +1,4 @@
+use crate::prelude::*;
 use morphorm::Alignment;
 use skia_safe::{
     font_arguments::VariationPosition,
@@ -5,7 +6,7 @@ use skia_safe::{
         FontCollection, Paragraph, ParagraphBuilder, ParagraphStyle, RectHeightStyle,
         RectWidthStyle, TextStyle,
     },
-    FontArguments, FontStyle, Paint,
+    BlendMode, FontArguments, FontStyle, Paint,
 };
 use vizia_storage::{LayoutChildIterator, LayoutTreeIterator, Tree};
 use vizia_style::TextOverflow;

@@ -20,7 +20,6 @@ vizia_storage.workspace = true
 vizia_id.workspace = true
 vizia_input.workspace = true
 vizia_window.workspace = true
-# vizia_style.workspace = true
 vizia_render.workspace = true
 accesskit = "0.18"
 

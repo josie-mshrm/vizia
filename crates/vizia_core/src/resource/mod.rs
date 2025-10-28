@@ -4,19 +4,15 @@ mod image_id;
 
 pub use image_id::ImageId;
 use vizia_id::{GenerationalId, IdManager};
+use vizia_render::resource::ImageOrSvg;
 
-use crate::context::ResourceContext;
+// use crate::context::ResourceContext;
 use crate::entity::Entity;
 use crate::prelude::IntoCssStr;
 // use crate::view::Canvas;
 use fluent_bundle::{FluentBundle, FluentResource};
 use hashbrown::{HashMap, HashSet};
 use unic_langid::LanguageIdentifier;
-
-pub(crate) enum ImageOrSvg {
-    Svg(skia_safe::svg::Dom),
-    Image(skia_safe::Image),
-}
 
 pub(crate) struct StoredImage {
     pub image: ImageOrSvg,

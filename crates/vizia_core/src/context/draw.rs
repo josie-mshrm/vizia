@@ -13,9 +13,10 @@ use vizia_style::LengthPercentageOrAuto;
 
 use hashbrown::HashMap;
 
+use crate::animation::Interpolator;
 use crate::cache::CachedData;
 use crate::events::ViewHandler;
-use crate::interpolator::Interpolator;
+use crate::prelude::*;
 use crate::resource::{ImageOrSvg, ResourceManager};
 use crate::text::TextContext;
 use vizia_input::MouseState;

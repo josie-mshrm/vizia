@@ -1,11 +1,25 @@
 //! Context types for retained state, used during view building, event handling, and drawing.
 
 mod access;
+#[doc(hidden)]
+pub mod backend;
+mod draw;
 mod event;
 mod proxy;
 mod resource;
 
+pub use access::*;
+pub use draw::*;
+pub use event::*;
+pub use proxy::*;
+pub use resource::*;
+
 use log::debug;
+use skia_safe::{
+    svg,
+    textlayout::{FontCollection, TypefaceFontProvider},
+    FontMgr,
+};
 use std::cell::RefCell;
 use std::collections::{BinaryHeap, VecDeque};
 use std::rc::Rc;
@@ -21,25 +35,19 @@ use vizia_window::WindowDescription;
 use copypasta::{nop_clipboard::NopClipboardContext, ClipboardContext, ClipboardProvider};
 use hashbrown::{hash_map::Entry, HashMap, HashSet};
 
-pub use access::*;
-pub use event::*;
-pub use proxy::*;
-pub use resource::*;
+// use crate::{
+//     binding::{Store, StoreId},
+//     events::{TimedEvent, TimedEventHandle, TimerState, ViewHandler},
+//     model::ModelData,
+// };
 
-use crate::{
-    binding::{Store, StoreId},
-    events::{TimedEvent, TimedEventHandle, TimerState, ViewHandler},
-    model::ModelData,
-};
-
-use crate::{
-    binding::{BindingHandler, MapId},
-    resource::StoredImage,
-};
+// use crate::binding::{BindingHandler, MapId};
+use crate::resource::StoredImage;
 use crate::{cache::CachedData, resource::ImageOrSvg};
 
 use crate::prelude::*;
 use crate::resource::ResourceManager;
+use crate::text::TextContext;
 use vizia_input::{ImeState, MouseState};
 use vizia_storage::{ChildIterator, LayoutTreeIterator};
 

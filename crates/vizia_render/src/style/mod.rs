@@ -427,7 +427,7 @@ impl Style {
         self.rules.clear();
     }
 
-    pub(crate) fn get_animation(&self, name: &str) -> Option<&Animation> {
+    pub fn get_animation(&self, name: &str) -> Option<&Animation> {
         self.animations.get(name)
     }
 
@@ -1893,24 +1893,24 @@ impl Style {
         self.fill.remove(entity);
     }
 
-    pub(crate) fn needs_restyle(&mut self, entity: Entity) {
+    pub fn needs_restyle(&mut self, entity: Entity) {
         self.restyle.0.insert(entity).unwrap();
     }
 
-    pub(crate) fn needs_relayout(&mut self) {
+    pub fn needs_relayout(&mut self) {
         self.system_flags.set(SystemFlags::RELAYOUT, true);
     }
 
-    pub(crate) fn needs_access_update(&mut self, entity: Entity) {
+    pub fn needs_access_update(&mut self, entity: Entity) {
         self.reaccess.0.insert(entity).unwrap();
     }
 
-    pub(crate) fn needs_text_update(&mut self, entity: Entity) {
+    pub fn needs_text_update(&mut self, entity: Entity) {
         self.text_construction.0.insert(entity).unwrap();
         self.text_layout.0.insert(entity).unwrap();
     }
 
-    pub(crate) fn needs_text_layout(&mut self, entity: Entity) {
+    pub fn needs_text_layout(&mut self, entity: Entity) {
         self.text_layout.0.insert(entity).unwrap();
     }
 
@@ -1921,7 +1921,7 @@ impl Style {
     // }
 
     // Remove all shared style data.
-    pub(crate) fn clear_style_rules(&mut self) {
+    pub fn clear_style_rules(&mut self) {
         self.disabled.clear_rules();
         // Display
         self.display.clear_rules();
