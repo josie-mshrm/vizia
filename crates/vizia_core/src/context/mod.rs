@@ -15,11 +15,11 @@ pub use proxy::*;
 pub use resource::*;
 
 use log::debug;
-use skia_safe::{
-    svg,
-    textlayout::{FontCollection, TypefaceFontProvider},
-    FontMgr,
-};
+// use skia_safe::{
+//     svg,
+//     textlayout::{FontCollection, TypefaceFontProvider},
+//     FontMgr,
+// };
 use std::cell::RefCell;
 use std::collections::{BinaryHeap, VecDeque};
 use std::rc::Rc;
@@ -35,20 +35,24 @@ use vizia_window::WindowDescription;
 use copypasta::{nop_clipboard::NopClipboardContext, ClipboardContext, ClipboardProvider};
 use hashbrown::{hash_map::Entry, HashMap, HashSet};
 
-// use crate::{
-//     binding::{Store, StoreId},
-//     events::{TimedEvent, TimedEventHandle, TimerState, ViewHandler},
-//     model::ModelData,
-// };
+use crate::recoil::Signal;
+use crate::{
+    binding::{Store, StoreId},
+    cache::CachedData,
+    events::{TimedEvent, TimedEventHandle, TimerState, ViewHandler},
+    model::ModelData,
+    recoil::RecoilRoot,
+    resource::StoredImage,
+};
 
-// use crate::binding::{BindingHandler, MapId};
-use crate::resource::StoredImage;
-use crate::{cache::CachedData, resource::ImageOrSvg};
+use crate::binding::{BindingHandler, MapId};
 
 use crate::prelude::*;
 use crate::resource::ResourceManager;
-use crate::text::TextContext;
 use vizia_input::{ImeState, MouseState};
+use vizia_render::resource::Data;
+use vizia_render::resource::Image;
+use vizia_render::text::TextContext;
 use vizia_storage::{ChildIterator, LayoutTreeIterator};
 
 static DEFAULT_LAYOUT: &str = include_str!("../../resources/themes/default_layout.css");
@@ -809,9 +813,7 @@ impl Context {
             id
         };
 
-        if let Some(image) =
-            skia_safe::Image::from_encoded(unsafe { skia_safe::Data::new_bytes(data) })
-        {
+        if let Some(image) = Image::from_encoded(unsafe { Data::new_bytes(data) }) {
             match self.resource_manager.images.entry(id) {
                 Entry::Occupied(mut occ) => {
                     occ.get_mut().image = ImageOrSvg::Image(image);

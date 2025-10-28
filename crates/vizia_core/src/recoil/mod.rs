@@ -1,7 +1,7 @@
 use crate::binding::{Binding, Data, Res, ResGet};
-use crate::context::{DataContext, EventContext, LocalizationContext};
-use crate::entity::Entity;
+use crate::context::{DataContext, EventContext};
 use crate::prelude::ToStringLocalized;
+use vizia_render::prelude::Entity;
 
 use std::any::Any;
 use std::cell::RefCell;

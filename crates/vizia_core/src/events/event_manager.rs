@@ -483,7 +483,7 @@ fn internal_state_updates(cx: &mut Context, window_event: &WindowEvent, meta: &m
                 && cx.modifiers == Modifiers::CTRL | Modifiers::SHIFT | Modifiers::ALT
             {
                 use crate::systems::compute_element_hash;
-                use vizia_style::selectors::bloom::BloomFilter;
+                use vizia_render::style::selectors::bloom::BloomFilter;
 
                 let mut filter = BloomFilter::default();
                 compute_element_hash(cx.hovered, &cx.tree, &cx.style, &mut filter);

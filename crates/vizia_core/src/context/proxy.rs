@@ -3,6 +3,7 @@ use std::fmt::Formatter;
 use std::sync::Mutex;
 
 use super::InternalEvent;
+use vizia_render::resource::{Data, Image};
 
 use crate::prelude::*;
 
@@ -82,7 +83,7 @@ impl ContextProxy {
         data: &[u8],
         policy: ImageRetentionPolicy,
     ) -> Result<(), ProxyEmitError> {
-        if let Some(image) = skia_safe::Image::from_encoded(skia_safe::Data::new_copy(data)) {
+        if let Some(image) = Image::from_encoded(Data::new_copy(data)) {
             self.emit(InternalEvent::LoadImage { path, image: Mutex::new(Some(image)), policy })?
         }
 

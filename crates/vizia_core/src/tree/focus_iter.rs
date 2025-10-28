@@ -1,5 +1,4 @@
-use crate::entity::Entity;
-use crate::prelude::Style;
+use crate::prelude::{Entity, Style};
 use crate::style::{Abilities, Display};
 use vizia_id::GenerationalId;
 use vizia_storage::{

@@ -6,20 +6,25 @@ use std::rc::Rc;
 
 use hashbrown::hash_map::Entry;
 use hashbrown::{HashMap, HashSet};
+use vizia_render::text::TextContext;
 use vizia_storage::{LayoutTreeIterator, TreeIterator};
 
 use crate::animation::{AnimId, Interpolator};
 use crate::cache::CachedData;
 use crate::events::{TimedEvent, TimedEventHandle, TimerState, ViewHandler};
+use crate::model::ModelData;
 use crate::prelude::*;
-use crate::resource::{ImageOrSvg, ResourceManager, StoredImage};
+use crate::recoil::RecoilRoot;
+use crate::resource::{ResourceManager, StoredImage};
 use crate::tree::{focus_backward, focus_forward, is_navigatable};
 use vizia_input::MouseState;
+use vizia_render::resource::Data;
+use vizia_render::resource::Image;
 
 #[cfg(feature = "clipboard")]
 use copypasta::ClipboardProvider;
 
-use super::{LocalizationContext, ModelData, DARK_THEME, LIGHT_THEME};
+use super::{LocalizationContext, DARK_THEME, LIGHT_THEME};
 
 type Views = HashMap<Entity, Box<dyn ViewHandler>>;
 type Models = HashMap<Entity, HashMap<TypeId, Box<dyn ModelData>>>;
@@ -470,7 +475,7 @@ impl<'a> EventContext<'a> {
             id
         };
 
-        if let Some(image) = skia_safe::Image::from_encoded(skia_safe::Data::new_copy(data)) {
+        if let Some(image) = Image::from_encoded(Data::new_copy(data)) {
             match self.resource_manager.images.entry(id) {
                 Entry::Occupied(mut occ) => {
                     occ.get_mut().image = ImageOrSvg::Image(image);

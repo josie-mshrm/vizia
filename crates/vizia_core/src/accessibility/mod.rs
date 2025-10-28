@@ -1,6 +1,6 @@
-use crate::entity::Entity;
 use accesskit::NodeId;
 use vizia_id::GenerationalId;
+use vizia_render::prelude::Entity;
 
 /// Trait for converting between an [Entity] and an accesskit [NodeId].
 pub trait IntoNode {

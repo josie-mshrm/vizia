@@ -1,6 +1,7 @@
 use accesskit::{Node, NodeId, Rect, TextDirection, TextSelection};
 
-use crate::{cache::CachedData, prelude::*, text::TextContext};
+use crate::{cache::CachedData, prelude::*};
+use vizia_render::text::TextContext;
 
 /// A context used for configuring the accessibility features of a view.
 pub struct AccessContext<'a> {

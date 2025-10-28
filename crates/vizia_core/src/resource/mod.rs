@@ -4,10 +4,10 @@ mod image_id;
 
 pub use image_id::ImageId;
 use vizia_id::{GenerationalId, IdManager};
-use vizia_render::resource::ImageOrSvg;
+use vizia_render::resource::{Data, ImageOrSvg};
+use vizia_render::{prelude::*, resource::Image};
 
-// use crate::context::ResourceContext;
-use crate::entity::Entity;
+use crate::context::ResourceContext;
 use crate::prelude::IntoCssStr;
 // use crate::view::Canvas;
 use fluent_bundle::{FluentBundle, FluentResource};
@@ -91,10 +91,8 @@ impl ResourceManager {
             ImageId::root(),
             StoredImage {
                 image: ImageOrSvg::Image(
-                    skia_safe::Image::from_encoded(unsafe {
-                        skia_safe::Data::new_bytes(include_bytes!(
-                            "../../resources/images/broken_image.png"
-                        ))
+                    Image::from_encoded(unsafe {
+                        Data::new_bytes(include_bytes!("../../resources/images/broken_image.png"))
                     })
                     .unwrap(),
                 ),

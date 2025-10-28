@@ -1,4 +1,4 @@
-use vizia_style::Url;
+use vizia_render::style::Url;
 
 use crate::prelude::*;
 

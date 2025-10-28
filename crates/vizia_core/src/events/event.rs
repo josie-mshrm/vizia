@@ -1,6 +1,6 @@
-use crate::entity::Entity;
 use std::{any::Any, cmp::Ordering, fmt::Debug};
 use vizia_id::GenerationalId;
+use vizia_render::prelude::Entity;
 use web_time::Instant;
 
 /// Determines how an event propagates through the tree.
@@ -84,7 +84,7 @@ impl Event {
     /// # }
     /// # pub enum AppEvent {
     /// #     Increment,
-    /// #     Decrement,    
+    /// #     Decrement,
     /// # }
     /// # impl Model for AppData {
     /// #     fn event(&mut self, _cx: &mut EventContext, event: &mut Event) {

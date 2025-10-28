@@ -2,7 +2,8 @@ use std::{cmp::Ordering, rc::Rc};
 
 use web_time::{Duration, Instant};
 
-use crate::{context::EventContext, entity::Entity};
+use crate::context::EventContext;
+use vizia_render::prelude::Entity;
 
 /// Enum which can be used to determine the reason a timer callback was called.
 ///

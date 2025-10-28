@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-use vizia_style::{BorderWidth, Property};
+use vizia_render::style::{BorderWidth, Property};
 
 /// A builder for constructing animations.
 pub struct AnimationBuilder<'a> {

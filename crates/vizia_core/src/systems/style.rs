@@ -4,8 +4,7 @@ use dashmap::{DashMap, ReadOnlyView};
 use hashbrown::HashMap;
 #[cfg(feature = "rayon")]
 use rayon::prelude::*;
-use vizia_storage::{LayoutParentIterator, TreeBreadthIterator};
-use vizia_style::{
+use vizia_render::style::{
     matches_selector,
     precomputed_hash::PrecomputedHash,
     selectors::{
@@ -18,6 +17,7 @@ use vizia_style::{
     },
     Element, MatchingContext, MatchingMode, PseudoClass, QuirksMode, SelectorIdent, Selectors,
 };
+use vizia_storage::{LayoutParentIterator, TreeBreadthIterator};
 
 /// A node used for style matching.
 #[derive(Clone)]
@@ -241,7 +241,7 @@ impl Element for Node<'_, '_> {
 
     fn add_element_unique_hashes(
         &self,
-        _filter: &mut vizia_style::selectors::bloom::BloomFilter,
+        _filter: &mut vizia_render::style::selectors::bloom::BloomFilter,
     ) -> bool {
         false
     }

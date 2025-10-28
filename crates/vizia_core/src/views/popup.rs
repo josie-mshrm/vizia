@@ -2,8 +2,6 @@ use crate::context::TreeProps;
 use crate::prelude::*;
 use bitflags::bitflags;
 
-use crate::vg;
-
 /// A model which can be used by views which contain a popup.
 #[derive(Debug, Default, Data, Lens, Clone)]
 pub struct PopupData {

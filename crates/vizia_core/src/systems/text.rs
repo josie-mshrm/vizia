@@ -8,10 +8,10 @@ use skia_safe::{
     },
     BlendMode, FontArguments, FontStyle, Paint,
 };
+use vizia_render::style::TextOverflow;
 use vizia_storage::{LayoutChildIterator, LayoutTreeIterator, Tree};
-use vizia_style::TextOverflow;
 
-use crate::{cache::CachedData, entity::Entity, layout::BoundingBox};
+use crate::cache::CachedData;
 
 pub(crate) fn text_system(cx: &mut Context) {
     let iterator = LayoutTreeIterator::full(&cx.tree);

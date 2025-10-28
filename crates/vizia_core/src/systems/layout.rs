@@ -3,11 +3,8 @@ use crate::prelude::*;
 use morphorm::Node;
 use vizia_storage::LayoutTreeIterator;
 
-use crate::{
-    entity::Entity,
-    layout::{node::SubLayout, BoundingBox, GeoChanged},
-    style::SystemFlags,
-};
+use crate::{layout::node::SubLayout, style::SystemFlags};
+use vizia_render::prelude::{BoundingBox, Entity, GeoChanged};
 
 /// Determines the size and position of views.
 /// TODO: Currently relayout is done on an entire tree rather than incrementally.

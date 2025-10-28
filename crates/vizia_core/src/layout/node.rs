@@ -1,11 +1,11 @@
-use crate::{prelude::*, resource::ImageOrSvg};
-// use crate::resource::{ImageOrSvg, ResourceManager};
+use crate::prelude::*;
 use morphorm::Node;
 use skia_safe::wrapper::PointerWrapper;
+use vizia_render::style::Display;
 use vizia_storage::{MorphormChildIter, Tree};
-use vizia_style::Display;
 
-use crate::{entity::Entity, text::TextContext};
+use crate::entity::Entity;
+use vizia_render::text::TextContext;
 
 pub struct SubLayout<'a> {
     pub text_context: &'a mut TextContext,

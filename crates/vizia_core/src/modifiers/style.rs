@@ -1,4 +1,4 @@
-use vizia_style::{ColorStop, CornerRadius, Rect};
+use vizia_render::style::{ColorStop, CornerRadius, Rect};
 
 use super::internal;
 use crate::prelude::*;

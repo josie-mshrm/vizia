@@ -1,8 +1,9 @@
 use std::path::PathBuf;
 
-use crate::{entity::Entity, environment::ThemeMode, layout::cache::GeoChanged};
+use crate::environment::ThemeMode;
+use crate::style::CursorIcon;
 use vizia_input::{Code, Key, MouseButton};
-use vizia_render::CursorIcon;
+use vizia_render::{entity::Entity, layout::GeoChanged};
 use vizia_window::{WindowPosition, WindowSize};
 
 #[derive(Debug, Clone)]

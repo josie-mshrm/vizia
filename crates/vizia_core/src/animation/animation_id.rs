@@ -5,6 +5,12 @@ use vizia_id::{
 
 use crate::context::EventContext;
 
+/// An ID used to reference style animations stored in the style store.
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+pub struct Animation(u64);
+
+impl_generational_id!(Animation);
+
 /// Trait for getting the animation id From an [Animation] or an animation name.
 pub trait AnimId {
     /// Returns the animation associated with the id.

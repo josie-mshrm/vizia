@@ -1,11 +1,11 @@
 mod movement;
 pub use movement::*;
 
-pub(crate) mod scrolling;
-pub(crate) use scrolling::*;
+pub mod scrolling;
+pub use scrolling::*;
 
-pub(crate) mod text_context;
-pub(crate) use text_context::*;
+pub mod text_context;
+pub use text_context::*;
 
 pub mod editable_text;
 pub use editable_text::*;

@@ -3,10 +3,12 @@ use hashbrown::{hash_map::Entry, HashSet};
 use vizia_storage::Tree;
 
 use crate::{
-    entity::Entity,
-    resource::{ImageOrSvg, ImageRetentionPolicy, ResourceManager, StoredImage},
+    resource::{ImageRetentionPolicy, ResourceManager, StoredImage},
     style::Style,
 };
+use vizia_render::prelude::Entity;
+use vizia_render::resource::Image;
+use vizia_render::resource::ImageOrSvg;
 
 use super::{Context, ContextProxy, EventProxy};
 
@@ -45,12 +47,7 @@ impl<'a> ResourceContext<'a> {
     }
 
     /// Loads the provided image into the resource manager.
-    pub fn load_image(
-        &mut self,
-        path: String,
-        image: skia_safe::Image,
-        policy: ImageRetentionPolicy,
-    ) {
+    pub fn load_image(&mut self, path: String, image: Image, policy: ImageRetentionPolicy) {
         let id = if let Some(image_id) = self.resource_manager.image_ids.get(&path) {
             *image_id
         } else {

@@ -65,11 +65,11 @@ use indexmap::IndexMap;
 use log::warn;
 use std::fmt::Debug;
 use std::ops::{Deref, DerefMut, Range};
-use vizia_style::selectors::parser::{AncestorHashes, Selector};
+use vizia_render::style::selectors::parser::{AncestorHashes, Selector};
 
 use crate::prelude::*;
 
-pub use vizia_style::{
+pub use vizia_render::style::{
     Alignment, Angle, BackgroundImage, BackgroundSize, BorderStyleKeyword, ClipPath, Color,
     CornerShape, CssRule, CursorIcon, Display, Filter, FontFamily, FontSize, FontSlant,
     FontVariation, FontWeight, FontWeightKeyword, FontWidth, GenericFontFamily, Gradient,
@@ -80,7 +80,7 @@ pub use vizia_style::{
     VerticalPositionKeyword, Visibility, RGBA,
 };
 
-use vizia_style::{
+use vizia_render::style::{
     BlendMode, EasingFunction, KeyframeSelector, ParserOptions, Property, Selectors, StyleSheet,
 };
 
@@ -202,7 +202,7 @@ pub(crate) struct StyleRule {
 
 impl StyleRule {
     pub(crate) fn new(selector: Selector<Selectors>) -> Self {
-        let hashes = AncestorHashes::new(&selector, vizia_style::QuirksMode::NoQuirks);
+        let hashes = AncestorHashes::new(&selector, vizia_render::style::QuirksMode::NoQuirks);
         Self { selector, hashes }
     }
 }

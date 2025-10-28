@@ -9,7 +9,8 @@ use skia_safe::{
 };
 use std::any::{Any, TypeId};
 use std::f32::consts::SQRT_2;
-use vizia_style::LengthPercentageOrAuto;
+use vizia_render::style::LengthPercentageOrAuto;
+use vizia_render::text::TextContext;
 
 use hashbrown::HashMap;
 
@@ -17,8 +18,8 @@ use crate::animation::Interpolator;
 use crate::cache::CachedData;
 use crate::events::ViewHandler;
 use crate::prelude::*;
-use crate::resource::{ImageOrSvg, ResourceManager};
-use crate::text::TextContext;
+use crate::recoil::RecoilRoot;
+use crate::resource::ResourceManager;
 use vizia_input::MouseState;
 
 use super::ModelData;

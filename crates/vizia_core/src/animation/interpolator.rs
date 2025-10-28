@@ -1,11 +1,9 @@
 use morphorm::Units;
-use vizia_style::{
+use vizia_render::style::{
     Angle, BackgroundSize, ClipPath, Color, ColorStop, Display, Filter, FontSize, Gradient, Length,
     LengthOrPercentage, LengthPercentageOrAuto, LengthValue, LineDirection, LinearGradient,
     Opacity, PercentageOrNumber, Rect, Scale, Shadow, Transform, Translate, RGBA,
 };
-
-use skia_safe::Matrix;
 
 use crate::style::ImageOrGradient;
 
