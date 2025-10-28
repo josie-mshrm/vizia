@@ -16,22 +16,15 @@ pub(crate) mod accessibility;
 pub mod animation;
 
 pub mod binding;
-#[doc(hidden)]
-pub(crate) mod cache;
 pub mod context;
-#[doc(hidden)]
-pub(crate) mod entity;
 pub mod environment;
 pub mod events;
 pub mod input;
-pub mod layout;
 pub mod localization;
 pub mod model;
 pub mod modifiers;
 pub mod resource;
-pub mod style;
 pub(crate) mod systems;
-pub(crate) mod text;
 #[doc(hidden)]
 pub mod tree;
 /// Helper utilities
@@ -42,11 +35,6 @@ pub mod window;
 
 pub mod recoil;
 mod storage;
-
-/// Contains types and functions used for custom drawing within views. This is a re-export of [skia-safe](https://github.com/rust-skia/rust-skia).
-pub mod vg {
-    pub use skia_safe::*;
-}
 
 /// A collection of built-in SVG icons.
 pub mod icons;
@@ -74,15 +62,14 @@ pub mod prelude {
 
     pub use super::animation::{Animation, AnimationBuilder, KeyframeBuilder};
     pub use super::context::{
-        AccessContext, AccessNode, Context, ContextProxy, DataContext, DrawContext, EmitContext,
-        EventContext, ProxyEmitError, WindowState,
+        AccessContext, AccessNode, Context, ContextProxy, DataContext, EmitContext, EventContext,
+        ProxyEmitError, WindowState,
     };
     pub use super::entity::Entity;
     pub use super::environment::{AppTheme, Environment, EnvironmentEvent, ThemeMode};
     pub use super::events::{Event, Propagation, Timer, TimerAction};
     pub use super::include_style;
     pub use super::input::{Keymap, KeymapEntry, KeymapEvent};
-    pub use super::layout::{BoundingBox, GeoChanged};
     pub use super::localization::{Localized, ToStringLocalized};
     pub use super::modifiers::{
         AbilityModifiers, AccessibilityModifiers, ActionModifiers, LayoutModifiers,
@@ -94,10 +81,12 @@ pub mod prelude {
     pub use super::views::*;
     pub use super::window::{DropData, WindowEvent};
     pub use accesskit::{Action, Live, Role};
-    pub use skia_safe::Canvas;
+    // pub use skia_safe::Canvas;
     pub use vizia_derive::{Data, Lens};
     pub use vizia_id::GenerationalId;
     pub use vizia_input::{Code, Key, KeyChord, Modifiers, MouseButton, MouseButtonState};
+    pub use vizia_render::context::DrawContext;
+    pub use vizia_render::layout::{BoundingBox, GeoChanged};
     pub use vizia_storage::{Tree, TreeExt};
     pub use vizia_window::{Anchor, AnchorTarget, WindowButtons, WindowPosition, WindowSize};
 

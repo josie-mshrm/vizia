@@ -1,7 +1,6 @@
-use crate::cache::CachedData;
+use crate::{cache::CachedData, entity::Entity};
 use morphorm::Cache;
 
-use crate::prelude::*;
 use bitflags::bitflags;
 
 bitflags! {

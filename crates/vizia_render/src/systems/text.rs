@@ -1,14 +1,16 @@
+use morphorm::Alignment;
 use skia_safe::{
     font_arguments::VariationPosition,
     textlayout::{
         FontCollection, Paragraph, ParagraphBuilder, ParagraphStyle, RectHeightStyle,
         RectWidthStyle, TextStyle,
     },
-    BlendMode, FontArguments, FontStyle, Paint,
+    FontArguments, FontStyle, Paint,
 };
-use vizia_storage::{LayoutChildIterator, LayoutTreeIterator};
+use vizia_storage::{LayoutChildIterator, LayoutTreeIterator, Tree};
+use vizia_style::TextOverflow;
 
-use crate::{cache::CachedData, prelude::*};
+use crate::{cache::CachedData, entity::Entity, layout::BoundingBox};
 
 pub(crate) fn text_system(cx: &mut Context) {
     let iterator = LayoutTreeIterator::full(&cx.tree);

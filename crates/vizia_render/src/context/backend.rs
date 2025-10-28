@@ -4,9 +4,6 @@ use skia_safe::Surface;
 use vizia_storage::LayoutTreeIterator;
 use vizia_window::WindowDescription;
 
-use super::EventProxy;
-use crate::{cache::CachedData, prelude::*, systems::*};
-
 #[cfg(feature = "clipboard")]
 use copypasta::ClipboardProvider;
 

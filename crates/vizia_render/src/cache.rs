@@ -1,7 +1,11 @@
 //! The cache is a store for intermediate data produced while computing state, notably layout
 //! results. The main type here is CachedData, usually accessed via `cx.cache`.
 
-use crate::prelude::*;
+use crate::{
+    entity::Entity,
+    layout::{BoundingBox, GeoChanged},
+};
+
 use skia_safe::{Matrix, Path};
 use vizia_storage::SparseSet;
 
